@@ -10,33 +10,36 @@ export default function Home() {
 
     const handleClick = () => {
         if (input.trim() !== '') {
-            fetchCoordinates(input.trim());
+            fetchWeather(input.trim());
         }
     };
 
-    const fetchCoordinates = async (city) => {
-        try {
-            const response = await axios.get(`https://api.openweathermap.org/geo/1.0/direct?q=${city}&appid=${APIkey}`);
-            const data = response.data[0];
+//  const fetchCoordinates = async (city) => {
+ //       try {
+  //          const response = await axios.get(`https://api.openweathermap.org/geo/1.0/direct?q=${city}&appid=${APIkey}`);
+//            const data = response.data[0];
 
-            if (data && data.name && city.toLowerCase() === data.name.toLowerCase()) {
-                fetchWeather(data.lat, data.lon);
-                setErrorPopUp('');
-            } else {
-                setErrorPopUp('City not found');
-                setWeather(null);
-            }
-        } catch (error) {
-            setWeather(null);
-            console.error("Error fetching coordinates:", error);
-        }
-    };
+           // if (data && data.name && city.toLowerCase() === data.name.toLowerCase()) {
+              //  fetchWeather(data.lat, data.lon);
+             //   setErrorPopUp('');
+            //} else {
+           //     setErrorPopUp('City not found');
+         //       setWeather(null);
+       //     }
+     //   } catch (error) {
+   //         setWeather(null);
+ //           console.error("Error fetching coordinates:", error);
+ //       }
+//    };
 
-    const fetchWeather = async (lat, lon) => {
+    const fetchWeather = async (city) => {
         try {
-            const response = await axios.get(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${APIkey}&units=metric`);
+            console.log(`Fetching weather from: https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${APIkey}&units=metric `)
+            const response = await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${APIkey}&units=metric`);
+            console.log('Weather fetched:', response.data)
             setWeather(response.data);
         } catch (error) {
+            setErrorPopUp('City not found');
             console.error("Error fetching weather:", error);
         }
     };
