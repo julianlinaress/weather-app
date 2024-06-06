@@ -3,7 +3,7 @@ import axios from "axios";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 export default function Home() {
-    const APIkey = '7ab9ac7fe919a00b684ad176d6200fdc';
+    const APIkey = process.env.REACT_APP_API_KEY;
     const [input, setInput] = useState('');
     const [weather, setWeather] = useState(null);
     const [errorPopUp, setErrorPopUp] = useState('');
