@@ -16,7 +16,7 @@ export default function Home() {
 
     const fetchCoordinates = async (city) => {
         try {
-            const response = await axios.get(`http://api.openweathermap.org/geo/1.0/direct?q=${city}&appid=${APIkey}`);
+            const response = await axios.get(`https://api.openweathermap.org/geo/1.0/direct?q=${city}&appid=${APIkey}`);
             const data = response.data[0];
 
             if (data && data.name && city.toLowerCase() === data.name.toLowerCase()) {
