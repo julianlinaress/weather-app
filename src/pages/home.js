@@ -34,12 +34,14 @@ export default function Home() {
 
     const fetchWeather = async (city) => {
         try {
-            console.log(`Fetching weather from: https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${APIkey}&units=metric `)
+            console.log(`Fetching weather from: https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${APIkey}&units=metric `);
             const response = await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${APIkey}&units=metric`);
             console.log('Weather fetched:', response.data)
             setWeather(response.data);
+            setErrorPopUp('');
         } catch (error) {
             setErrorPopUp('City not found');
+            setWeather(null);
             console.error("Error fetching weather:", error);
         }
     };
